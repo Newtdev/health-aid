@@ -70,7 +70,7 @@ export default function ResetPassword() {
 
     return (
 			<section className="w-full h-screen  flex justify-center items-center">
-				<article className="lg:w-[90%]  flex items-center justify-center p-16 bg-white rounded-lg ">
+				<article className="lg:w-[90%]  flex items-center justify-center lg:p-16 bg-white rounded-lg ">
 					{updatePassword?.isLoading ? <Loader /> : null}
 					{/* {updatePassword?.isSuccess ? (
 						<ModalComp
@@ -80,7 +80,7 @@ export default function ResetPassword() {
 						/>
 					) : null} */}
 					<form
-						className="flex flex-col gap-4 w-[90%]"
+						className="flex flex-col gap-4 lg:w-[90%]"
 						onSubmit={formik.handleSubmit}>
 						<div className="my-3">
 							<div className="flex justify-center lg:hidden">

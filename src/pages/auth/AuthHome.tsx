@@ -24,12 +24,7 @@ const routes = useRoutes(authRoutes)
 					/>
 				</div>
 			</div>
-			<div className="basis-[50%] bg-white">
-			
-					
-				{routes}
-		
-			</div>
+			<div className="basis-full lg:basis-[50%] bg-white">{routes}</div>
 		</div>
 	);
 }

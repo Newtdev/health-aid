@@ -57,16 +57,15 @@ export default function Login() {
 
 
     return (
-			<section className="w-full h-screen  flex justify-center items-center">
+			<section className="w-full h-screen flex justify-center items-center">
 				<article className="w-full flex items-center justify-center lg:p-16 px-4  rounded-lg ">
 					{login?.isLoading ? <Loader /> : null}
 					<form
 						className="flex flex-col gap-4 w-[90%]"
-					onSubmit={formik.handleSubmit}>
-					<div className='flex justify-center lg:hidden'>
-
-						<LogoComp />
-					</div>
+						onSubmit={formik.handleSubmit}>
+						<div className="flex justify-center lg:hidden">
+							<LogoComp />
+						</div>
 						<div className="my-3 ">
 							<h1 className="text-lg md:text-xl lg:text-3xl text-center text-primary-dark">
 								Log in to your account

@@ -75,8 +75,8 @@ export default function SignUp() {
     const phoneChange = (value:string) =>
 			formik.setFieldValue("phoneNumber", value);
     return (
-			<section className="w-full h-screen  flex justify-center items-center lg:px-16">
-				<article className="w-full  flex items-center justify-center lg:p-16 bg-white rounded-lg max-w-3xl">
+			<section className="w-full h-screen  flex justify-center items-center  lg:px-16">
+				<article className="w-full  flex items-center justify-center lg:p-16 px-4 bg-white rounded-lg max-w-3xl">
 					{signUp?.isLoading ? <Loader /> : null}
 					{signUp?.isSuccess ? (
 						<ModalComp
