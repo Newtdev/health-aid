@@ -20,7 +20,7 @@ const Validation = yup.object().shape({
 async function handleForgetPassword({ email }: { email: string }) {
 	try {
 		const { error } = await supabase.auth.resetPasswordForEmail(email, {
-			redirectTo: "http://localhost:5173/update-password",
+			redirectTo: "https://health-aid.vercel.app/update-password",
 		});
 		toast.error(error?.message);
 		console.log("error", error?.message);
