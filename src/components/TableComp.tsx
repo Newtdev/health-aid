@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Modal, Spinner, Table } from "flowbite-react";
-import { isError } from "react-query";
+import { Button, Spinner, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 const tableHeader: any[] = [
 	{

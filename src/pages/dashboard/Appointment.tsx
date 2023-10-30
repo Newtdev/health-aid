@@ -1,7 +1,7 @@
 import { Button, TextInput } from 'flowbite-react';
 import TableComp from '../../components/TableComp';
 import {GoSearch} from 'react-icons/go'
-import React, { useState } from 'react'
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '../../dtos/contant';
 

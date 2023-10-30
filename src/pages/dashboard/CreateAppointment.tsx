@@ -1,7 +1,6 @@
 import { InputError } from '../../components/InputError';
 import { Button, Datepicker, FileInput, Label, Select, TextInput, Textarea } from 'flowbite-react';
-import { useFormik } from 'formik';
-import React from 'react'
+import { useFormik } from "formik";
 
 export default function CreateAppointment() {
 
