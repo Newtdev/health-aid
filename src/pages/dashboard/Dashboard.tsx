@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import { ROUTE } from "../../dtos/contant";
 import { Button } from "flowbite-react";
 import CardComp from "../../components/CardComp";
+import { ROUTE } from "../../contants/AppRoute";
 
 const cards = [
 	{
@@ -38,9 +38,8 @@ const cards = [
 	},
 ];
 
-
 export default function Dashboard() {
-  return (
+	return (
 		<section className=" h-screen w-full bg-white">
 			<article
 				className="w-full h-full
@@ -55,13 +54,18 @@ export default function Dashboard() {
 								N 0.00
 							</h1>
 						</div>
-						<Button className="font-bold bg-primary-darker hover:bg-primary-dark">Fund wallet</Button>
+						<Button className="font-bold bg-primary-darker hover:bg-primary-dark">
+							Fund wallet
+						</Button>
 					</div>
 				</div>
 				<div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-          {cards.map((d) => <Fragment key={d.id}>
-            <CardComp {...d} />
-        </Fragment> )};
+					{cards.map((d) => (
+						<Fragment key={d.id}>
+							<CardComp {...d} />
+						</Fragment>
+					))}
+					;
 				</div>
 			</article>
 		</section>

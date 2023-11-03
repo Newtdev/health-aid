@@ -1,17 +1,17 @@
-import { ROUTE } from '../../dtos/contant';
-import { useRoutes } from 'react-router-dom';
-import Login from './Login';
-import SignUp from './Signup';
-import ForgotPassword from './ForgetPassword';
-import ResetPassword from './ResetPassword';
-import NoPage from '../404';
-import { configureRoutes } from '../../routes/config';
-import { LogoComp } from '../../components/LogoComp';
-
+import { useRoutes } from "react-router-dom";
+import Login from "./Login";
+import SignUp from "./Signup";
+import ForgotPassword from "./ForgetPassword";
+import ResetPassword from "./ResetPassword";
+import NoPage from "../404";
+import { configureRoutes } from "../../routes/config";
+import { LogoComp } from "../../components/LogoComp";
+import { ROUTE } from "../../contants/AppRoute";
+import OtpPage from "./OTP";
 
 export default function AuthHome() {
-const routes = useRoutes(authRoutes)
-  return (
+	const routes = useRoutes(authRoutes);
+	return (
 		<div className="w-screen flex justify-between ">
 			<div className="bg-primary-dark hidden lg:flex h-screen basis-[50%] justify-between flex-col ">
 				<LogoComp />
@@ -28,7 +28,6 @@ const routes = useRoutes(authRoutes)
 		</div>
 	);
 }
-
 
 const authRoutes = configureRoutes([
 	{
@@ -50,6 +49,10 @@ const authRoutes = configureRoutes([
 	{
 		path: ROUTE.Update_Password,
 		element: <ResetPassword />,
+	},
+	{
+		path: ROUTE.Otp,
+		element: <OtpPage />,
 	},
 	{
 		path: ROUTE.ErrorPage,

@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { BrowserRouter as AppRouter } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ToastContainer } from 'react-toastify'
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -13,18 +12,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 			<QueryClientProvider client={queryClient}>
 				<App />
 			</QueryClientProvider>
-			<ToastContainer
-				position="top-right"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				// theme="light"
-			/>
 		</AppRouter>
 	</React.StrictMode>,
 );

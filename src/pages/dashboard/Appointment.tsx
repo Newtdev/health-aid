@@ -3,7 +3,7 @@ import TableComp from '../../components/TableComp';
 import {GoSearch} from 'react-icons/go'
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { ROUTE } from '../../dtos/contant';
+import { ROUTE } from "../../contants/AppRoute";
 
 export default function Appointment() {
   const [search, setSearch] = useState('');

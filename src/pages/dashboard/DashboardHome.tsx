@@ -1,6 +1,5 @@
 import DashboardWrapper from '../../components/DashboardWrapper';
-import Header from '../../components/Header';
-import { ROUTE } from '../../dtos/contant';
+import Header from "../../components/Header";
 import Dashboard from './Dashboard';
 import { Navigate, useRoutes } from 'react-router-dom';
 import { configureRoutes } from '../../routes/config';
@@ -8,6 +7,7 @@ import Sidebar from '../../components/SideBar';
 import Wallet from './Wallet';
 import Appointment from './Appointment';
 import CreateAppointment from './CreateAppointment';
+import { ROUTE } from "../../contants/AppRoute";
 
 export default function DashboardHome() {
     const routes = useRoutes(DashboardRoutes); 

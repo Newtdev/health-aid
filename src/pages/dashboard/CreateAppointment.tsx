@@ -74,24 +74,16 @@ export default function CreateAppointment() {
 								type="time"
 								sizing="lg"
 								color={
-									formik.errors.time &&
-									formik.touched.time
-										? "failure"
-										: "gray"
+									formik.errors.time && formik.touched.time ? "failure" : "gray"
 								}
 								helperText={
 									<InputError
-										error={
-											formik.errors.time &&
-											formik.touched.time
-										}
+										error={formik.errors.time && formik.touched.time}
 										name={formik.errors?.time || ""}
 									/>
 								}
 								{...formik.getFieldHelpers("time")}
 							/>
-						
-						
 						</div>
 					</div>
 					<div>
@@ -108,10 +100,7 @@ export default function CreateAppointment() {
 							}
 							helperText={
 								<InputError
-									error={
-										formik.errors.address &&
-										formik.touched.address
-									}
+									error={formik.errors.address && formik.touched.address}
 									name={formik.errors?.address || ""}
 								/>
 							}
@@ -127,7 +116,7 @@ export default function CreateAppointment() {
 								id="comment"
 								placeholder="Leave a comment..."
 								required
-							  rows={4}
+								rows={4}
 								{...formik.getFieldHelpers("comment")}
 							/>
 						</div>
