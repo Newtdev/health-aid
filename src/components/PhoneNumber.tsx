@@ -9,9 +9,9 @@ export default function PhoneNumber({ formik, phoneChange }: any) {
 			defaultCountry="ng"
 			value={formik?.values?.phoneNumber}
 			onChange={phoneChange}
-			style={{ padding: "10px" }}
-			className="w-full rounded-lg outline:none border text-black"
-			inputClassName="w-full  outline:none border-none focus:ring-none focus:border-none text-black"
+			className="w-full rounded-lg  text-black h-14 flex items-center border border-gray-400"
+			inputClassName="w-full  outline-none border-none focus:ring-none focus:border-none text-black py-6 
+            !h-full"
 		/>
 	);
 }

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import PhoneInput from "react-phone-number-input";
 import { InputError } from "../components/InputError";
 import { Button, Datepicker, Label, Select, TextInput } from "flowbite-react";
 import useUser from "../hooks/useUser";
+import PhoneNumber from "./PhoneNumber";
 
 export default function UserProfile({ formik }: { formik: any }) {
 	const user = useUser();
@@ -109,13 +109,18 @@ export default function UserProfile({ formik }: { formik: any }) {
 						value="Phone number"
 						className="block my-3"
 					/>
-					<PhoneInput
+					<PhoneNumber
+						placeholder="Enter phone number"
+						value={formik.values.phoneNumber}
+						onChange={phoneChange}
+					/>
+					{/* <PhoneInput
 						placeholder="Enter phone number"
 						value={formik.values.phoneNumber}
 						onChange={phoneChange}
 						style={{ borderRadius: "4px" }}
 						className="w-full rounded-lg px-4 py-2 outline:none border text-black"
-					/>
+					/> */}
 				</div>
 			</div>
 

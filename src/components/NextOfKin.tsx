@@ -220,8 +220,6 @@ export default function NextOfKin({ formik }: { formik: any }) {
 						placeholder="Enter phone number"
 						value={formik.values.phoneNumber}
 						onChange={phoneChange}
-						style={{ borderRadius: "4px" }}
-						className="w-full rounded-lg px-4 py-2 outline:none border text-black"
 					/>
 				</div>
 			</div>
