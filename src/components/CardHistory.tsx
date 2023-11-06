@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Label, TextInput } from "flowbite-react";
 import useUserWalletInfo from "../hooks/useUserWalletInfo";
 import { useState } from "react";
@@ -12,7 +13,7 @@ import axiosInstance from "../api";
 import { API_ROUTES } from "../contants/ApiRoutes";
 import { useMutation } from "react-query";
 
-async function MakePayment(amount) {
+async function MakePayment(amount: any) {
 	const result = await axiosInstance.post(API_ROUTES.PAYMENT_PAYSTACK, amount);
 	console.log(result);
 }
@@ -88,6 +89,7 @@ export default function CardHistory() {
 			return {
 				details: !showModal.details,
 				main: false,
+				payment: false,
 			};
 		});
 	}

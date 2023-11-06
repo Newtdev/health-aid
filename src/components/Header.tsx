@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import { LogoComp } from "./LogoComp";
 
 const Header = () => {

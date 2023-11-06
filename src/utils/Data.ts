@@ -138,7 +138,7 @@ export const ServiceListData = [
 		],
 	},
 	{
-		id: 3,
+		id: 4,
 		heading: "Mental Health Services",
 		list: [
 			{
@@ -156,7 +156,7 @@ export const ServiceListData = [
 		],
 	},
 	{
-		id: 4,
+		id: 5,
 		heading: "Diagnostic Services",
 		list: [
 			{
@@ -174,7 +174,7 @@ export const ServiceListData = [
 		],
 	},
 	{
-		id: 5,
+		id: 6,
 		heading: "Pharmaceutical Services",
 		list: [
 			{
