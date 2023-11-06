@@ -13,6 +13,8 @@ import { LogoComp } from "../../components/LogoComp";
 import axiosInstance from "../../api";
 import { API_ROUTES } from "../../contants/ApiRoutes";
 import { ROUTE } from "../../contants/AppRoute";
+import { QUERY_KEY } from "../../contants/queryKey";
+import { SaveDataToLocalStorage } from "../../utils/saveData";
 
 const Validation = yup.object().shape({
 	email: yup.string().label("Email").email().required(),
@@ -23,18 +25,14 @@ type LoginTypes = {
 	email: string;
 	password: string;
 };
-async function handleSignIn(values: LoginTypes) {
-	try {
-		const data = await axiosInstance.post(API_ROUTES.LOGIN, values);
-
-		console.log("axios", data);
-	} catch (error: { data: { message: string } } | any) {
-		toast.error(error?.data?.message);
-	}
-}
 
 export default function Login() {
-	const LoginMutation = useMutation(handleSignIn);
+	const LoginMutation = useMutation(QUERY_KEY.LOGIN, handleSignIn, {
+		onSuccess: (data) => {
+			SaveDataToLocalStorage(data);
+			location.reload();
+		},
+	});
 
 	const formik = useFormik({
 		initialValues: {
@@ -45,9 +43,17 @@ export default function Login() {
 		validateOnChange: true,
 		validationSchema: Validation,
 		onSubmit: (values) => {
-			LoginMutation.mutate(handleSignIn(values) as any);
+			LoginMutation.mutate(values);
 		},
 	});
+
+	async function handleSignIn(values: LoginTypes) {
+		try {
+			return await axiosInstance.post(API_ROUTES.LOGIN, values);
+		} catch (error: { data: { message: string } } | any) {
+			toast.error(error?.data?.message);
+		}
+	}
 
 	return (
 		<section className="w-full h-screen flex justify-center items-center">
