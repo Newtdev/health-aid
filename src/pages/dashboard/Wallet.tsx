@@ -32,8 +32,9 @@ const tableHeader = [
 	},
 ];
 
+
 async function getUserWalletDetails() {
-	return await axiosInstance.get(API_ROUTES.USER_WALLET);
+	return await axiosInstance.get<any>(API_ROUTES.USER_WALLET);
 	// return res || {};
 }
 
@@ -46,7 +47,7 @@ const Wallet = () => {
 		setSearch(e.target.value);
 	}
 	const userTransactionData = useMemo(
-		() => userWallerInfo?.data?.transactions,
+		() => userWallerInfo?.data?.data?.transactions,
 		[userWallerInfo],
 	);
 

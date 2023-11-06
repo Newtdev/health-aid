@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { useMutation } from "react-query";
 import { InputError } from "../../components/InputError";
 import Loader from "../../components/Loader";
-import ModalComp from "../../components/Modal";
 import { LogoComp } from "../../components/LogoComp";
 import { ROUTE } from "../../contants/AppRoute";
 import axiosInstance from "../../api";
@@ -49,13 +48,13 @@ export default function ForgotPassword() {
 		<section className="w-full h-screen  flex justify-center items-center">
 			<article className="w-full md:w-[90%] flex items-center justify-center lg:p-16 bg-white rounded-lg ">
 				{forgotPassword?.isLoading ? <Loader /> : null}
-				{forgotPassword?.isSuccess ? (
+				{/* {forgotPassword?.isSuccess ? (
 					<ModalComp
 						header="Update Password"
 						text="Check your email for update password link"
 						show={forgotPassword.isSuccess}
 					/>
-				) : null}
+				) : null} */}
 				<form
 					className="w-full flex flex-col gap-4 md:w-[90%]"
 					onSubmit={formik.handleSubmit}>

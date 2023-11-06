@@ -1,6 +1,6 @@
 import { Button } from "flowbite-react";
 import useUserWalletInfo from "../hooks/useUserWalletInfo";
-import React, { useState } from "react";
+import { useState } from "react";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { formatNumberToCurrency } from "../utils/formatCurrency";
 import ModalComp from "./Modal";

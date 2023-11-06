@@ -47,7 +47,7 @@ export default function Appointment() {
 		setSearch(e.target.value);
 	}
 	const userTransactionData = useMemo(
-		() => userWallerInfo?.data?.transactions,
+		() => userWallerInfo?.data?.data?.transactions,
 		[userWallerInfo],
 	);
 
