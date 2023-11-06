@@ -6,4 +6,5 @@ export enum API_ROUTES {
 	RESET_PASSWORD = "auth/reset",
 	GET_USER_DETAILS = "user/me",
 	USER_WALLET = "wallet/transactions",
+	PAYMENT_PAYSTACK = "wallet/create-charge",
 }

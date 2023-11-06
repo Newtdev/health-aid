@@ -4,6 +4,7 @@ import { TfiTimer } from "react-icons/tfi";
 import { PiWalletLight } from "react-icons/pi";
 import { CiSettings } from "react-icons/ci";
 import { GoHome } from "react-icons/go";
+import { MdOutlineMedicalServices } from "react-icons/md";
 
 const DashboardLinks = [
 	{
@@ -24,7 +25,12 @@ const DashboardLinks = [
 		link: ROUTE.Wallet,
 		icon: <PiWalletLight className="text-2xl" />,
 	},
-	// { id: 4, name: 'Service', link: '/services' },
+	{
+		id: 4,
+		name: "Services",
+		link: ROUTE.ServicesList,
+		icon: <MdOutlineMedicalServices className="text-2xl " />,
+	},
 	// { id: 5, name: 'Referral', link: '/referral' },
 	{
 		id: 6,

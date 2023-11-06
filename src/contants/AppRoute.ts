@@ -7,6 +7,7 @@ export enum ROUTE {
 	Wallet = "/wallet",
 	Appointments = "/appointments",
 	Settings = "/settings",
+	ServicesList = "/services",
 	Appointments_Create = "/appointments/create",
 	Forget_Password = "/auth/forgot-password",
 	Update_Password = "/auth/update-password",
