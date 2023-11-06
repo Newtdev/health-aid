@@ -10,6 +10,7 @@ axiosInstance.interceptors.request.use(
 		// Do something before request is sent
 		const token = RetriveStoredData()?.token;
 		if (token) {
+			console.log("token", token);
 			config.headers.Authorization = `Bearer ${token}`;
 		}
 
