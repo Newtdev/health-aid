@@ -7,6 +7,7 @@ import { API_ROUTES } from "../../contants/ApiRoutes";
 import { QUERY_KEY } from "../../contants/queryKey";
 import Loader from "../../components/Loader";
 import CardHistory from "../../components/CardHistory";
+import { TfiTimer } from "react-icons/tfi";
 
 const cards = [
 	{
@@ -14,33 +15,33 @@ const cards = [
 		name: "Book an Appointment",
 		link: ROUTE.Appointments,
 		btnName: "Book Now",
-		icon: "",
+		icon: <TfiTimer className="text-4xl text-primary-lighter" />,
 		background: "bg-primary-lighter text-white",
 	},
 	{
 		id: 2,
 		name: "Sevice List",
-		link: ROUTE.Appointments,
+		link: ROUTE.ServicesList,
 		btnName: "More details",
-		icon: "",
+		icon: <TfiTimer className="text-4xl text-primary-lighter" />,
 		background: "bg-primary-lighter text-white",
 	},
 	{
 		id: 3,
 		name: "Get Help",
-		link: ROUTE.Appointments,
-		icon: "",
+		link: ROUTE.Dashboard_Home,
+		icon: <TfiTimer className="text-4xl text-primary-lighter" />,
 		background: "bg-primary-lighter",
 		btnName: "Contact customer agent",
 	},
-	{
-		id: 4,
-		name: "Refer and Earn",
-		link: ROUTE.Appointments,
-		background: "bg-primary-lighter text-black",
-		icon: "",
-		btnName: "More details",
-	},
+	// {
+	// 	id: 4,
+	// 	name: "Refer and Earn",
+	// 	link: ROUTE.Appointments,
+	// 	background: "bg-primary-lighter text-black",
+	// 	icon: "",
+	// 	btnName: "More details",
+	// },
 ];
 
 async function getUserDetails() {

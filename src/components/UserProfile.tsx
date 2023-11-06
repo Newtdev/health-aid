@@ -4,11 +4,18 @@ import { InputError } from "../components/InputError";
 import { Button, Datepicker, Label, Select, TextInput } from "flowbite-react";
 import useUser from "../hooks/useUser";
 import PhoneNumber from "./PhoneNumber";
+import { useEffect } from "react";
 
 export default function UserProfile({ formik }: { formik: any }) {
 	const user = useUser();
+	// console.log(formik.values);
+
 	const phoneChange = (value: string) =>
 		formik.setFieldValue("phoneNumber", value);
+
+	useEffect(() => {
+		formik.setFieldValue("firstName", user?.firstName);
+	}, [user]);
 	return (
 		<div>
 			<h2 className="text-black font-bold text-xl">Update User Profile</h2>
@@ -43,6 +50,7 @@ export default function UserProfile({ formik }: { formik: any }) {
 					<TextInput
 						id="disabledInput1"
 						placeholder="First name"
+						values={formik.values?.firstName}
 						type="text"
 						sizing="lg"
 						color={

@@ -113,7 +113,7 @@ export default function CardHistory() {
 			<div className="flex justify-between items-center">
 				<p className="text-sm md:text-lg text-white">HEALTH SAVINGS ACCOUNT</p>
 				<Button
-					className="font-bold bg-primary-darker hover:bg-primary-dark"
+					className="font-bold bg-red-700 hover:bg-red-800"
 					onClick={handleMainToggleModal}>
 					Fund wallet
 				</Button>

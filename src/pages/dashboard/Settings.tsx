@@ -5,6 +5,7 @@ import { useState } from "react";
 import UserProfile from "../../components/UserProfile";
 import NextOfKin from "../../components/NextOfKin";
 import PasswordReset from "../../components/PasswordReset";
+// import useUser from "../../hooks/useUser";
 const Tabs = [
 	{ id: 1, name: "User Profile" },
 	// { id: 2, name: "Medical History" },
@@ -34,6 +35,7 @@ function Component({ handleActive, active = 1 }: any) {
 
 export default function Settings() {
 	const [active, setActive] = useState(1);
+	// const user = useUser();
 
 	function handleActive(id: number) {
 		setActive(() => id);
