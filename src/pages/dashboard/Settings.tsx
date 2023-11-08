@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import UserProfile from "../../components/UserProfile";
 import NextOfKin from "../../components/NextOfKin";
 import PasswordReset from "../../components/PasswordReset";
-// import useUser from "../../hooks/useUser";
+import useUser from "../../hooks/useUser";
 const Tabs = [
 	{ id: 1, name: "User Profile" },
 	// { id: 2, name: "Medical History" },
@@ -35,7 +35,7 @@ function Component({ handleActive, active = 1 }: any) {
 
 export default function Settings() {
 	const [active, setActive] = useState(1);
-	// const user = useUser();
+	const user = useUser();
 
 	function handleActive(id: number) {
 		setActive(() => id);
@@ -57,6 +57,9 @@ export default function Settings() {
 		onSubmit: () => {},
 	});
 
+	useEffect(() => {
+		formik.setFieldValue("firstName", user?.firstName);
+	}, [user]);
 	return (
 		<section className="h-full w-full">
 			<article className="h-full mt-12 pt-16 ">
