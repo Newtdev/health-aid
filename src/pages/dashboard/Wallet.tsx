@@ -5,33 +5,49 @@ import { GoSearch } from "react-icons/go";
 import { useMemo, useState } from "react";
 import CardHistory from "../../components/CardHistory";
 import { useQuery } from "react-query";
-import { QUERY_KEY } from "../../contants/queryKey";
+import { QUERY_KEY, STATUS } from "../../contants/queryKey";
 import { API_ROUTES } from "../../contants/ApiRoutes";
 import axiosInstance from "../../api";
+import { formatNumberToCurrency } from "../../utils/formatCurrency";
+import { format } from "date-fns";
+
+type CurrentDataTypes = {
+	createdAt: string | number | Date;
+	fees: string | undefined;
+	reference: any;
+	status: "pending" | "success" | "failed";
+};
 
 const tableHeader = [
 	{
 		id: "date",
 		label: "Date",
 	},
+	// {
+	// 	id: "time",
+	// 	label: "Time",
+	// },
+	// {
+	// 	id: "symptoms",
+	// 	label: "Symptoms",
+	// },
+	// {
+	// 	id: "practitioner",
+	// 	label: "Health Practitioner",
+	// },
 	{
-		id: "time",
-		label: "Time",
+		id: "reference",
+		label: "Reference Number",
 	},
 	{
-		id: "symptoms",
-		label: "Symptoms",
-	},
-	{
-		id: "practitioner",
-		label: "Health Practitioner",
+		id: "fees",
+		label: "Fees",
 	},
 	{
 		id: "status",
 		label: "Status",
 	},
 ];
-
 
 async function getUserWalletDetails() {
 	return await axiosInstance.get<any>(API_ROUTES.USER_WALLET);
@@ -42,14 +58,32 @@ const Wallet = () => {
 	const [search, setSearch] = useState("");
 	const userWallerInfo = useQuery(QUERY_KEY.WALLET, getUserWalletDetails);
 	const [currentPage, setCurrentPage] = useState(1);
+	const userWalletData = useMemo(
+		() => userWallerInfo?.data?.data?.transactions,
+		[userWallerInfo?.data?.data?.transactions],
+	);
 
 	function handleSearch(e: { target: { value: string } }) {
 		setSearch(e.target.value);
 	}
-	const userTransactionData = useMemo(
-		() => userWallerInfo?.data?.data?.transactions,
-		[userWallerInfo],
-	);
+	const userTransactionData = () =>
+		userWalletData?.data.reduce(
+			(acc: any, cur: CurrentDataTypes) => [
+				...acc,
+				{
+					...cur,
+					date: format(new Date(cur?.createdAt), "d-MM-yyyy"),
+					fees: `N ${formatNumberToCurrency(cur?.fees)}`,
+					reference: cur?.reference,
+					status: (
+						<span className={`${STATUS[cur?.status]} capitalize`}>
+							{cur?.status}
+						</span>
+					),
+				},
+			],
+			[],
+		);
 
 	const onPageChange = (page: number) => setCurrentPage(page);
 	return (
@@ -71,13 +105,15 @@ const Wallet = () => {
 				<div className="mt-6">
 					<TableComp
 						tableHeader={tableHeader}
-						tableRow={userTransactionData}
+						tableRow={userTransactionData()}
 						error={userWallerInfo?.error as string}
-						isLoading={userWallerInfo?.isLoading}
+						isLoading={userWallerInfo?.isLoading || userWallerInfo?.isFetching}
+						reload={userWallerInfo?.refetch}
 						isError={userWallerInfo?.isError}
 						isSuccess={userWallerInfo?.isSuccess}
 						onPageChange={onPageChange}
 						currentPage={currentPage}
+						totalPages={userWalletData?.totalPages}
 					/>
 				</div>
 			</article>

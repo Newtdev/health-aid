@@ -53,6 +53,8 @@ type TableTypes = {
 	tableHeader: { id: string; label: string }[];
 	tableRow: { data: []; totalPages: any } | any;
 	currentPage: number | any;
+	totalPages: number | any;
+	reload: () => void;
 };
 
 export default function TableComp({
@@ -64,6 +66,8 @@ export default function TableComp({
 	tableRow,
 	onPageChange,
 	currentPage,
+	totalPages,
+	reload,
 }: TableTypes) {
 	return (
 		<div className="h-full">
@@ -77,20 +81,22 @@ export default function TableComp({
 					<p>{error}</p>
 
 					<p>
-						<Button className="text-white bg-primary-dark mt-4 focus:border-0 hover:bg-primary-darker">
+						<Button
+							onClick={reload}
+							className="text-white bg-primary-dark mt-4 focus:border-0 hover:bg-primary-darker">
 							Reload
 						</Button>{" "}
 					</p>
 				</div>
 			) : null}
 
-			{isSuccess && tableRow?.data?.length < 1 ? (
+			{isSuccess && tableRow?.length < 1 ? (
 				<div className="w-full h-56 flex flex-col justify-center items-center text-gray-800">
 					<p>You have no data to display.</p>
 				</div>
 			) : null}
 
-			{isSuccess && tableRow?.data?.length > 0 ? (
+			{isSuccess && tableRow?.length > 0 ? (
 				<Table hoverable>
 					<Table.Head>
 						{tableHeader?.map((d: any) => {
@@ -99,7 +105,7 @@ export default function TableComp({
 					</Table.Head>
 					<Table.Body className="divide-y">
 						<>
-							{tableRow?.data?.map((row: any) => (
+							{tableRow?.map((row: any) => (
 								<Table.Row
 									key={row.id}
 									className="bg-white dark:border-gray-700 dark:bg-gray-800">
@@ -112,11 +118,14 @@ export default function TableComp({
 							))}
 						</>
 					</Table.Body>
-					<Pagination
-						currentPage={currentPage}
-						totalPages={tableRow?.totalPages || 0}
-						onPageChange={onPageChange}
-					/>
+
+					{totalPages > 1 ? (
+						<Pagination
+							currentPage={currentPage}
+							totalPages={totalPages}
+							onPageChange={onPageChange}
+						/>
+					) : null}
 				</Table>
 			) : null}
 		</div>

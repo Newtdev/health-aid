@@ -30,7 +30,7 @@ export default function Login() {
 	const LoginMutation = useMutation(QUERY_KEY.LOGIN, handleSignIn, {
 		onSuccess: (data) => {
 			SaveDataToLocalStorage(data?.data);
-			location.reload();
+			// location.reload();
 		},
 	});
 

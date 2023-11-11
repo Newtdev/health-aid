@@ -1,30 +1,36 @@
-import { Button, TextInput } from 'flowbite-react';
-import TableComp from '../../components/TableComp';
-import {GoSearch} from 'react-icons/go'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button, TextInput } from "flowbite-react";
+import TableComp from "../../components/TableComp";
+import { GoSearch } from "react-icons/go";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTE } from "../../contants/AppRoute";
 import { useQuery } from "react-query";
-import { QUERY_KEY } from "../../contants/queryKey";
+import { APPOINTMENT_TYPE, QUERY_KEY, STATUS } from "../../contants/queryKey";
 import { API_ROUTES } from "../../contants/ApiRoutes";
 import axiosInstance from "../../api";
+import { format } from "date-fns";
 
 const tableHeader = [
 	{
-		id: "date",
+		id: "createdAt",
 		label: "Date",
 	},
 	{
-		id: "time",
-		label: "Time",
+		id: "appointmentDate",
+		label: "Appointment Date",
 	},
 	{
-		id: "symptoms",
-		label: "Symptoms",
+		id: "type",
+		label: "Appointment type",
 	},
 	{
-		id: "practitioner",
-		label: "Health Practitioner",
+		id: "channel",
+		label: "Appointment Channel",
+	},
+	{
+		id: "address",
+		label: "Address",
 	},
 	{
 		id: "status",
@@ -33,23 +39,48 @@ const tableHeader = [
 ];
 
 async function getUserWalletDetails() {
-	return await axiosInstance.get(API_ROUTES.USER_WALLET);
+	return await axiosInstance.get(API_ROUTES.APPOINTMENTS_LIST);
 	// return res || {};
 }
 
 export default function Appointment() {
 	const navigate = useNavigate();
 	const [search, setSearch] = useState("");
-	const userWallerInfo = useQuery(QUERY_KEY.WALLET, getUserWalletDetails);
+	const appointmentList = useQuery(QUERY_KEY.WALLET, getUserWalletDetails);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	function handleSearch(e: { target: { value: string } }) {
 		setSearch(e.target.value);
 	}
-	const userTransactionData = useMemo(
-		() => userWallerInfo?.data?.data?.transactions,
-		[userWallerInfo],
+	const allAppointments = useMemo(
+		() => appointmentList?.data?.data?.data,
+		[appointmentList],
 	);
+	const useAppointmentsList = () =>
+		allAppointments?.data?.reduce(
+			(acc: any[], curr: any) => [
+				...acc,
+				{
+					...curr,
+					appointmentDate: format(
+						new Date(curr?.appointmentDate),
+						"d-MM-yyy h:m:s a",
+					),
+					createdAt: format(
+						new Date(curr?.appointmentDate),
+						"d-MM-yyy h:m:s a",
+					),
+					type: APPOINTMENT_TYPE[curr.type],
+					address: curr?.meta?.address,
+					status: (
+						<span className={`${STATUS[curr?.status]} capitalize`}>
+							{curr?.status}
+						</span>
+					),
+				},
+			],
+			[],
+		);
 
 	const onPageChange = (page: number) => setCurrentPage(page);
 
@@ -74,16 +105,20 @@ export default function Appointment() {
 					</Button>
 				</div>
 				<div></div>
-				<div className="mt-6">
+				<div className="mt-6 py-6">
 					<TableComp
 						tableHeader={tableHeader}
-						tableRow={userTransactionData}
-						error={userWallerInfo?.error as string}
-						isLoading={userWallerInfo?.isLoading}
-						isError={userWallerInfo?.isError}
-						isSuccess={userWallerInfo?.isSuccess}
+						tableRow={useAppointmentsList()}
+						error={appointmentList?.error as string}
+						isLoading={
+							appointmentList?.isLoading || appointmentList?.isFetching
+						}
+						reload={appointmentList?.refetch}
+						isError={appointmentList?.isError}
+						isSuccess={appointmentList?.isSuccess}
 						onPageChange={onPageChange}
 						currentPage={currentPage}
+						totalPages={allAppointments?.totalPages}
 					/>
 				</div>
 			</article>

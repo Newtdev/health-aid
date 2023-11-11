@@ -12,10 +12,20 @@ import * as yup from "yup";
 import axiosInstance from "../api";
 import { API_ROUTES } from "../contants/ApiRoutes";
 import { useMutation } from "react-query";
+import { toast } from "react-toastify";
+import { IoCopyOutline } from "react-icons/io5";
 
 async function MakePayment(amount: any) {
-	const result = await axiosInstance.post(API_ROUTES.PAYMENT_PAYSTACK, amount);
-	console.log(result);
+	try {
+		const result = await axiosInstance.post(
+			API_ROUTES.PAYMENT_PAYSTACK,
+			amount,
+		);
+
+		location.replace(result?.data?.data?.authorization_url);
+	} catch (error: any) {
+		toast.error(error?.data?.data?.message);
+	}
 }
 const PaystackPayment = () => {
 	const payment = useMutation(MakePayment);
@@ -27,7 +37,6 @@ const PaystackPayment = () => {
 			amount: yup.string().trim().label("Amount").required(),
 		}),
 		onSubmit: (values) => {
-			console.log(values);
 			payment.mutate({
 				amount: Number(values?.amount),
 			});
@@ -105,8 +114,18 @@ export default function CardHistory() {
 
 	const accountInfo = [
 		{ name: "Account Name", details: userWallet?.accountName },
-		{ name: "Account Numer", details: userWallet?.accountBank },
+		{ name: "Account Number", details: userWallet?.accountNumber },
+		{ name: "Bank Name", details: userWallet?.accountBank },
 	];
+
+	const handleCopyAccountDetails = async () => {
+		try {
+			await window.navigator?.clipboard.writeText(userWallet?.accountNumber);
+			toast.success("Account number copied");
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<div className="w-full p-6 h-56 mt-6 rounded-lg bg-primary-dark ">
@@ -133,16 +152,22 @@ export default function CardHistory() {
 				</div>
 				<div className="mt-6">
 					<p className="text-sm md:text-lg text-white">WALLET INFORMATION</p>
-					<div className="flex items-center mt-2 gap-x-3">
-						<span className="font-bold text-sm flex text-white items-center gap-x-1">
+					<div className="flex items-center mt-2 gap-x-6">
+						<span className="font-bold text-sm md:text-base flex text-white items-center gap-x-1">
 							<h3>Account number:</h3>
-							<span className="flex items-center text-sm md:text-base">
-								{userWallet?.dvaID}
+							<span className="flex items-center ">
+								{userWallet?.accountNumber}
+							</span>
+							<span>
+								<IoCopyOutline
+									className="cursor-pointer"
+									onClick={handleCopyAccountDetails}
+								/>
 							</span>
 						</span>
 						<span className="font-bold text-base md:text-base flex text-white items-center gap-x-1">
 							<h3>Bank name:</h3>
-							<span className="flex items-center text-sm">
+							<span className="flex items-center">
 								{userWallet?.accountBank}
 							</span>
 						</span>
@@ -183,9 +208,19 @@ export default function CardHistory() {
 				{accountInfo.map((d) => (
 					<div className="w-full h-20 rounded-lg mt-4  py-4 px-6 border border-gray-300 cursor-pointer">
 						<h2 className="font-bold text-base text-primary-darker">
-							{d.name}
+							{d.name}{" "}
 						</h2>
-						<p className="text-gray-500 text-sm">{d.details}</p>
+						<div className=" flex gap-x-6 items-center">
+							<p className="text-gray-500 text-sm">{d.details}</p>
+							{d.name === "Account Number" ? (
+								<span>
+									<IoCopyOutline
+										className="cursor-pointer text-primary-light"
+										onClick={handleCopyAccountDetails}
+									/>
+								</span>
+							) : null}
+						</div>
 					</div>
 				))}
 			</ModalComp>

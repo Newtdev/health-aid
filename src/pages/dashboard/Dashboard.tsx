@@ -13,7 +13,7 @@ const cards = [
 	{
 		id: 1,
 		name: "Book an Appointment",
-		link: ROUTE.Appointments,
+		link: ROUTE.Appointments_Create,
 		btnName: "Book Now",
 		icon: <TfiTimer className="text-4xl text-primary-lighter" />,
 		background: "bg-primary-lighter text-white",
@@ -34,14 +34,6 @@ const cards = [
 		background: "bg-primary-lighter",
 		btnName: "Contact customer agent",
 	},
-	// {
-	// 	id: 4,
-	// 	name: "Refer and Earn",
-	// 	link: ROUTE.Appointments,
-	// 	background: "bg-primary-lighter text-black",
-	// 	icon: "",
-	// 	btnName: "More details",
-	// },
 ];
 
 async function getUserDetails() {

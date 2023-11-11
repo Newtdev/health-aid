@@ -3,6 +3,7 @@
 import { InputError } from "../components/InputError";
 import { Button, Datepicker, Label, Select, TextInput } from "flowbite-react";
 import PhoneNumber from "./PhoneNumber";
+import { GoogleLocationInput } from "./GoogleLocation";
 const Relationships = [
 	{
 		code: "FTH",
@@ -113,6 +114,17 @@ const Relationships = [
 export default function NextOfKin({ formik }: { formik: any }) {
 	const phoneChange = (value: string) =>
 		formik.setFieldValue("phoneNumber", value);
+
+	const getLong = (value: number) => {
+		formik.setFieldValue("meta.lng", String(value));
+	};
+	const getLat = (value: number) => {
+		formik.setFieldValue("meta.lat", String(value));
+	};
+
+	const getAddress = (value: string) => {
+		formik.setFieldValue("meta.address", value);
+	};
 	return (
 		<div>
 			<h2 className="text-black font-bold text-xl">Next of Kin Information</h2>
@@ -222,6 +234,15 @@ export default function NextOfKin({ formik }: { formik: any }) {
 						onChange={phoneChange}
 					/>
 				</div>
+			</div>
+
+			<div className="my-3">
+				<Label className="block mb-3">Address</Label>
+				<GoogleLocationInput
+					getLat={getLat}
+					getLong={getLong}
+					getAddress={getAddress}
+				/>
 			</div>
 
 			<div id="select" className="mb-2">

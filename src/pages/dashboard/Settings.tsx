@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import UserProfile from "../../components/UserProfile";
 import NextOfKin from "../../components/NextOfKin";
@@ -43,23 +43,34 @@ export default function Settings() {
 	const formik = useFormik({
 		initialValues: {
 			appointmentType: "",
-			firstName: "",
-			lastName: "",
-			email: "",
-			phoneNumber: "",
-			gender: "",
+			firstName: user?.firstName,
+			lastName: user?.lastName,
+			email: user?.email,
+			phoneNumber: user?.phoneNumber,
+			gender: user?.gender,
 			date: "",
 			relationship: "",
 			file: null,
+			meta: {
+				nextOfKin: {
+					firstName: "",
+					lastName: "",
+					email: "",
+					phoneNumber: "",
+					gender: "",
+					relationShip: "",
+					date: "",
+				},
+			},
 		},
 		validateOnChange: true,
 		validateOnBlur: true,
 		onSubmit: () => {},
 	});
 
-	useEffect(() => {
-		formik.setFieldValue("firstName", user?.firstName);
-	}, [user]);
+	// useEffect(() => {
+	// 	formik.setFieldValue("firstName", user?.firstName);
+	// }, [user]);
 	return (
 		<section className="h-full w-full">
 			<article className="h-full mt-12 pt-16 ">
@@ -67,8 +78,8 @@ export default function Settings() {
 				<form className="flex w-full flex-col gap-4 mt-10">
 					{active == 1 ? <UserProfile formik={formik} /> : null}
 					{active == 3 ? <NextOfKin formik={formik} /> : null}
-					{active == 4 ? <PasswordReset formik={formik} /> : null}
 				</form>
+				{active == 4 ? <PasswordReset /> : null}
 			</article>
 		</section>
 	);

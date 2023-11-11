@@ -7,4 +7,7 @@ export enum API_ROUTES {
 	GET_USER_DETAILS = "user/me",
 	USER_WALLET = "wallet/transactions",
 	PAYMENT_PAYSTACK = "wallet/create-charge",
+	APPOINTMENTS = "schedule/create",
+	APPOINTMENTS_LIST = "schedule/all",
+	UPDATE_PASSWORD = "user/change-password",
 }
