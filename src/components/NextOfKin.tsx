@@ -126,10 +126,10 @@ export default function NextOfKin({ formik }: { formik: any }) {
 		formik.setFieldValue("meta.address", value);
 	};
 	return (
-		<div>
+		<div className="px-6">
 			<h2 className="text-black font-bold text-xl">Next of Kin Information</h2>
 
-			<div className="grid grid-cols-2 gap-x-4 mt-10">
+			<div className="grid grid-cols-1  md:grid-cols-2 gap-x-4 mt-10">
 				<div className="mb-2">
 					<Label
 						htmlFor="firstName"
@@ -200,7 +200,7 @@ export default function NextOfKin({ formik }: { formik: any }) {
 					<option>Others</option>
 				</Select>
 			</div>
-			<div className="grid grid-cols-2 gap-x-4 content-center">
+			<div className="grid grid-cols-1  md:grid-cols-2 gap-x-4 content-center">
 				<div className="mb-2">
 					<Label htmlFor="email" className="block my-3">
 						Email{" "}
@@ -291,7 +291,7 @@ export default function NextOfKin({ formik }: { formik: any }) {
 			<div className="py-4 w-full mb-4">
 				<Button
 					type="submit"
-					className="bg-primary-dark mt-4 w-1/2 mx-auto"
+					className="bg-primary-dark mt-4 w-full md:w-1/2 mx-auto"
 					size="lg">
 					Update Information
 				</Button>

@@ -65,14 +65,13 @@ export default function PasswordReset() {
 		validateOnChange: true,
 		validateOnBlur: true,
 		validationSchema: Validate,
-		onSubmit: ({ confirmPassword, currentPassword, ...values }) => {
-			console.log(values);
+		onSubmit: ({ confirmPassword, ...values }) => {
 			resetPasswordMutation.mutate(values);
 		},
 	});
 
 	return (
-		<div className="h-screen">
+		<div className="h-screen px-6">
 			{resetPasswordMutation?.isLoading ? <Loader /> : null}
 			<h2 className="text-black font-bold text-xl">Reset Password</h2>
 			<form className="mt-10" onSubmit={formik.handleSubmit}>
@@ -157,7 +156,7 @@ export default function PasswordReset() {
 				<div className="py-4 w-full mb-4">
 					<Button
 						type="submit"
-						className="bg-primary-dark mt-4 w-1/2 mx-auto"
+						className="bg-primary-dark mt-4 w-full md::w-1/2 mx-auto"
 						size="lg">
 						Update Password
 					</Button>

@@ -25,7 +25,7 @@ export default function UserProfile({ formik }: { formik: any }) {
 	};
 
 		return (
-			<div>
+			<div className="px-4">
 				<h2 className="text-black font-bold text-xl">Update User Profile</h2>
 				<div className="flex flex-col pb-10 mt-10">
 					{/* <img
@@ -48,7 +48,7 @@ export default function UserProfile({ formik }: { formik: any }) {
 					</h5>
 				</div>
 
-				<div className="grid grid-cols-2 gap-x-4 ">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 ">
 					<div className="mb-2">
 						<Label
 							htmlFor="firstName"
@@ -99,7 +99,7 @@ export default function UserProfile({ formik }: { formik: any }) {
 						/>
 					</div>
 				</div>
-				<div className="grid grid-cols-2 gap-x-4 content-center">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 content-center">
 					<div className="mb-2">
 						<Label htmlFor="email" className="block my-3">
 							Email{" "}

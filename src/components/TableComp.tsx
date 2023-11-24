@@ -73,7 +73,7 @@ export default function TableComp({
 		<div className="h-full">
 			{isLoading ? (
 				<div className="w-full h-full flex justify-center items-center">
-					<Spinner size="xl" />
+					<Spinner color="pink" size="xl" />
 				</div>
 			) : null}
 			{isError ? (

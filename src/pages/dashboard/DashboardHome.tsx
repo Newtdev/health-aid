@@ -10,14 +10,15 @@ import CreateAppointment from './CreateAppointment';
 import { ROUTE } from "../../contants/AppRoute";
 import Settings from "./Settings";
 import ServiceList from "./ServiceList";
-
+import { useState } from "react";
 
 export default function DashboardHome() {
 	const routes = useRoutes(DashboardRoutes);
+	const [toggleNav, setToggleNav] = useState(false);
 	return (
 		<section className="h-full w-screen overflow-x-hidden">
-			<Header />
-			<Sidebar />
+			<Header setToggleNav={setToggleNav} />
+			<Sidebar toggleNav={toggleNav} setToggleNav={setToggleNav} />
 			<div className="lg:w-[calc(100vw-16rem)] ml-auto  h-full flex items-center justify-between">
 				<DashboardWrapper>{routes}</DashboardWrapper>
 			</div>

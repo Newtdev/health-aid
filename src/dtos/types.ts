@@ -15,4 +15,5 @@ export interface LinksType {
 	name: string;
 	links: string;
 	icon: any;
+	setToggleNav: any;
 }

@@ -4,7 +4,7 @@ export enum API_ROUTES {
 	VERIFY = "auth/verify",
 	FORGOT_PASSWORD = "auth/request-reset",
 	RESET_PASSWORD = "auth/reset",
-	GET_USER_DETAILS = "user/me",
+	GET_USER_DETAILS = "user/update",
 	USER_WALLET = "wallet/transactions",
 	PAYMENT_PAYSTACK = "wallet/create-charge",
 	APPOINTMENTS = "schedule/create",

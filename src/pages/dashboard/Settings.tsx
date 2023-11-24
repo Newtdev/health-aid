@@ -6,31 +6,22 @@ import UserProfile from "../../components/UserProfile";
 import NextOfKin from "../../components/NextOfKin";
 import PasswordReset from "../../components/PasswordReset";
 import useUser from "../../hooks/useUser";
-const Tabs = [
-	{ id: 1, name: "User Profile" },
-	// { id: 2, name: "Medical History" },
-	{ id: 3, name: "Next of kin" },
-	{ id: 4, name: "Password Reset" },
-];
+import { Component } from "../../components/TabComp";
+import axiosInstance from "../../api";
+import { toast } from "react-toastify";
+import { API_ROUTES } from "../../contants/ApiRoutes";
 
-function Component({ handleActive, active = 1 }: any) {
-	return (
-		<div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-			<ul className="flex flex-wrap -mb-px">
-				{Tabs.map((d) => (
-					<li key={d.id} className="mr-2" onClick={() => handleActive(d.id)}>
-						<a
-							href="#"
-							className={` ${
-								d.id === active ? "border-primary-dark" : "border-transparent"
-							} inline-block p-4 border-b-2  rounded-t-lg`}>
-							{d.name}
-						</a>
-					</li>
-				))}
-			</ul>
-		</div>
-	);
+async function handleSignIn(values: any) {
+	try {
+		const result = await axiosInstance.patch(
+			API_ROUTES.GET_USER_DETAILS,
+			values,
+		);
+		toast.success(result?.data?.status);
+		location.replace(result?.data?.data);
+	} catch (error: { data: { message: string } } | any) {
+		toast.error(error?.data?.message);
+	}
 }
 
 export default function Settings() {
@@ -42,7 +33,6 @@ export default function Settings() {
 	}
 	const formik = useFormik({
 		initialValues: {
-			appointmentType: "",
 			firstName: user?.firstName,
 			lastName: user?.lastName,
 			email: user?.email,
@@ -65,7 +55,9 @@ export default function Settings() {
 		},
 		validateOnChange: true,
 		validateOnBlur: true,
-		onSubmit: () => {},
+		onSubmit: (values) => {
+			handleSignIn(values);
+		},
 	});
 
 	// useEffect(() => {
@@ -75,7 +67,9 @@ export default function Settings() {
 		<section className="h-full w-full">
 			<article className="h-full mt-12 pt-16 ">
 				<Component handleActive={handleActive} active={active} />
-				<form className="flex w-full flex-col gap-4 mt-10">
+				<form
+					className="flex w-full flex-col gap-4 mt-10"
+					onSubmit={formik.handleSubmit}>
 					{active == 1 ? <UserProfile formik={formik} /> : null}
 					{active == 3 ? <NextOfKin formik={formik} /> : null}
 				</form>

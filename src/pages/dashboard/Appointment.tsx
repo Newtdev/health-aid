@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, TextInput } from "flowbite-react";
+import { Button } from "flowbite-react";
 import TableComp from "../../components/TableComp";
-import { GoSearch } from "react-icons/go";
+// import { GoSearch } from "react-icons/go";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTE } from "../../contants/AppRoute";
@@ -38,20 +38,37 @@ const tableHeader = [
 	},
 ];
 
-async function getUserWalletDetails() {
-	return await axiosInstance.get(API_ROUTES.APPOINTMENTS_LIST);
+async function getUserWalletDetails(params: any) {
+	return await axiosInstance.get(API_ROUTES.APPOINTMENTS_LIST, { params });
 	// return res || {};
 }
 
 export default function Appointment() {
 	const navigate = useNavigate();
-	const [search, setSearch] = useState("");
-	const appointmentList = useQuery(QUERY_KEY.WALLET, getUserWalletDetails);
 	const [currentPage, setCurrentPage] = useState(1);
+	// const [search, setSearch] = useState("");
+	// const q = useDeferredValue(search);
 
-	function handleSearch(e: { target: { value: string } }) {
-		setSearch(e.target.value);
-	}
+	// const appointmentList = useQuery({
+	// 	queryKey: [QUERY_KEY.WALLET, currentPage, search],
+	// 	queryfn: () => getUserWalletDetails({ page: currentPage, search: q }),
+	// });
+
+	const appointmentList = useQuery({
+		queryKey: [QUERY_KEY.WALLET, currentPage],
+		queryFn: () => getUserWalletDetails({ page: currentPage }),
+		keepPreviousData: true,
+		staleTime: 200,
+	});
+
+	// getUserWalletDetails({
+	// 	...(currentPage > 1 && { page: currentPage }),
+	// 	...(search !== "" && { q:  }),
+	// }),
+
+	// function handleSearch(e: { target: { value: string } }) {
+	// 	setSearch(e.target.value);
+	// }
 	const allAppointments = useMemo(
 		() => appointmentList?.data?.data?.data,
 		[appointmentList],
@@ -86,26 +103,33 @@ export default function Appointment() {
 
 	return (
 		<section className=" h-screen w-full ">
-			<article className="h-full mt-16 pt-10 px-6 w-full">
-				<div className="py-6 flex justify-between items-center">
-					<TextInput
+			<article className="h-full mt-16 pt-10 md:px-6 w-full">
+				<div className="py-6 flex justify-end items-center px-6 md:px-0">
+					{/* <TextInput
 						icon={GoSearch}
 						sizing="lg"
-						value={search}
-						className="w-[80%]"
+						value={q}
+						className="w-full md:w-[80%]"
 						placeholder="search"
 						type="email"
 						onChange={handleSearch}
-					/>
+					/> */}
+					{/* {console.log(q, "sdddddd")} */}
 					<Button
-						className="bg-primary-dark"
+						className="bg-primary-dark hidden md:block"
 						size="lg"
+						onClick={() => navigate(ROUTE.Appointments_Create)}>
+						Book appointments
+					</Button>
+					<Button
+						className="bg-primary-dark mt-10 w-full md:hidden"
+						size="md"
 						onClick={() => navigate(ROUTE.Appointments_Create)}>
 						Book appointments
 					</Button>
 				</div>
 				<div></div>
-				<div className="mt-6 py-6">
+				<div className="mt-6 py-6 overflow-auto">
 					<TableComp
 						tableHeader={tableHeader}
 						tableRow={useAppointmentsList()}

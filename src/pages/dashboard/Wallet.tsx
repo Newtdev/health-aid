@@ -49,15 +49,18 @@ const tableHeader = [
 	},
 ];
 
-async function getUserWalletDetails() {
-	return await axiosInstance.get<any>(API_ROUTES.USER_WALLET);
+async function getUserWalletDetails(params: any) {
+	return await axiosInstance.get<any>(API_ROUTES.USER_WALLET, { params });
 	// return res || {};
 }
 
 const Wallet = () => {
 	const [search, setSearch] = useState("");
-	const userWallerInfo = useQuery(QUERY_KEY.WALLET, getUserWalletDetails);
 	const [currentPage, setCurrentPage] = useState(1);
+	const userWallerInfo = useQuery({
+		queryKey: [QUERY_KEY.WALLET, currentPage],
+		queryFn: () => getUserWalletDetails({ page: currentPage }),
+	});
 	const userWalletData = useMemo(
 		() => userWallerInfo?.data?.data?.transactions,
 		[userWallerInfo?.data?.data?.transactions],
@@ -102,7 +105,7 @@ const Wallet = () => {
 					/>
 				</div>
 				<div></div>
-				<div className="mt-6">
+				<div className="mt-6 overflow-auto">
 					<TableComp
 						tableHeader={tableHeader}
 						tableRow={userTransactionData()}

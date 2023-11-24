@@ -16,6 +16,9 @@ import { ROUTE } from "../../contants/AppRoute";
 import { QUERY_KEY } from "../../contants/queryKey";
 import { SaveDataToLocalStorage } from "../../utils/saveData";
 
+import { AuthContext } from "../../App";
+import { useContext } from "react";
+
 const Validation = yup.object().shape({
 	email: yup.string().label("Email").email().required(),
 	password: yup.string().trim().label("Password").required(),
@@ -27,12 +30,19 @@ type LoginTypes = {
 };
 
 export default function Login() {
+	// const { login } = useAuth();
+	const { setToken } = useContext(AuthContext) as any;
+
+	// console.log("aaaaa", a);
+
 	const LoginMutation = useMutation(QUERY_KEY.LOGIN, handleSignIn, {
 		onSuccess: (data) => {
 			SaveDataToLocalStorage(data?.data);
-			// location.reload();
+
+			setToken(data?.data);
 		},
 	});
+	// console.log(getAuth);
 
 	const formik = useFormik({
 		initialValues: {

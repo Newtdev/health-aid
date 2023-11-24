@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ROUTE } from "./../contants/AppRoute";
 import DashboardLinkesComp from "./DashboardLinksComp";
 import { TfiTimer } from "react-icons/tfi";
@@ -41,16 +42,23 @@ const DashboardLinks = [
 	// { id: 7, name: 'Log out', link: '/' }
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ toggleNav, setToggleNav }: any) => {
 	return (
 		<aside
 			id="logo-sidebar"
-			className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white text- border-r border-gray-200 sm:translate-x-0 "
+			className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
+				!toggleNav ? "-translate-x-full" : "translate-x-0"
+			} bg-white text- border-r border-gray-200 sm:translate-x-0 `}
 			aria-label="Sidebar">
 			<div className="h-full px-3 pb-4 overflow-y-auto ">
 				<ul className="space-y-2 font-medium mt-6 text-white">
 					{DashboardLinks.map((d) => (
-						<DashboardLinkesComp name={d.name} links={d.link} icon={d.icon} />
+						<DashboardLinkesComp
+							name={d.name}
+							links={d.link}
+							icon={d.icon}
+							setToggleNav={setToggleNav}
+						/>
 					))}
 				</ul>
 			</div>

@@ -1,6 +1,12 @@
 import { useMemo } from "react";
-import { RetriveStoredData } from "../utils/saveData";
+
+import useLocalStorage from "./useLocalStorage";
+import { QUERY_KEY } from "../contants/queryKey";
 
 export default function useUser() {
-	return useMemo(() => RetriveStoredData()?.user, []);
+	const { getItem } = useLocalStorage();
+	return useMemo(
+		() => JSON.parse(getItem(QUERY_KEY.LOGIN) || "")?.user,
+		[getItem],
+	);
 }

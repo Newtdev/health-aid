@@ -128,21 +128,26 @@ export default function CardHistory() {
 	};
 
 	return (
-		<div className="w-full p-6 h-56 mt-6 rounded-lg bg-primary-dark ">
+		<div className="w-full p-6 h-56 mt-6 rounded-lg bg-primary-dark">
 			<div className="flex justify-between items-center">
-				<p className="text-sm md:text-lg text-white">HEALTH SAVINGS ACCOUNT</p>
+				<p className="text-xs md:text-lg text-white">HEALTH SAVINGS ACCOUNT</p>
 				<Button
-					className="font-bold bg-red-700 hover:bg-red-800"
+					className="font-bold block md:hidden text-xs md:text-base  bg-red-700 hover:bg-red-800"
+					onClick={handleMainToggleModal}>
+					Fund
+				</Button>
+				<Button
+					className="font-bold hidden md:block text-2xl md:text-base  bg-red-700 hover:bg-red-800"
 					onClick={handleMainToggleModal}>
 					Fund wallet
 				</Button>
 			</div>
 			<div>
 				<div>
-					<span className="font-bold text-base md:text-base flex text-white items-center gap-x-3">
+					<span className="font-bold gap-y-6 md:gap-y-0 text-xs md:text-base flex text-white items-center gap-x-3">
 						<h2>Main balance:</h2>
 						<span className="flex items-center text-base">
-							<TbCurrencyNaira className="text-2xl" />
+							<TbCurrencyNaira className=" text-xs md:text-base lg:text-2xl" />
 							<h2>
 								{formatNumberToCurrency(userWallet?.balance?.mainBalance)}
 							</h2>
@@ -151,9 +156,9 @@ export default function CardHistory() {
 					{/* //wallet/verify-transaction?reference=34567890 */}
 				</div>
 				<div className="mt-6">
-					<p className="text-sm md:text-lg text-white">WALLET INFORMATION</p>
-					<div className="flex items-center mt-2 gap-x-6">
-						<span className="font-bold text-sm md:text-base flex text-white items-center gap-x-1">
+					<p className="text-xs md:text-lg text-white">WALLET INFORMATION</p>
+					<div className="flex flex-col gap-y-3 md:items-center md:flex-row mt-2 gap-x-6">
+						<span className="font-bold text-xs md:text-base flex text-white items-center gap-x-1">
 							<h3>Account number:</h3>
 							<span className="flex items-center ">
 								{userWallet?.accountNumber}
@@ -165,7 +170,7 @@ export default function CardHistory() {
 								/>
 							</span>
 						</span>
-						<span className="font-bold text-base md:text-base flex text-white items-center gap-x-1">
+						<span className="font-bold text-xs md:text-base flex text-white items-center gap-x-1">
 							<h3>Bank name:</h3>
 							<span className="flex items-center">
 								{userWallet?.accountBank}
