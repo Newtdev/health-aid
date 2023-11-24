@@ -194,7 +194,7 @@ export default function CreateAppointment() {
 							Symptoms
 						</Label>
 
-						{formik.values?.symptoms.map((d, i) => (
+						{formik.values?.symptoms.map((_, i) => (
 							<div className="flex justify-between items-center gap-x-2">
 								<TextInput
 									id="symptoms"
