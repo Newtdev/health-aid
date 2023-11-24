@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import AuthHome from "./pages/auth/AuthHome";
@@ -46,5 +47,4 @@ function App() {
 	);
 }
 
-export default App
-  
+export default App;
