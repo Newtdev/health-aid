@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { QUERY_KEY } from "../contants/queryKey";
 
 // type DataTypes = {};
@@ -16,4 +17,9 @@ export const RetriveStoredData = () => {
 		return JSON.parse(data);
 	}
 	return data;
+};
+
+export const clearItem = () => {
+	localStorage.removeItem(QUERY_KEY.LOGIN);
+	window.location.reload();
 };

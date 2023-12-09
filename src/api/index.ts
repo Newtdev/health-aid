@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RetriveStoredData } from "../utils/saveData";
+import { RetriveStoredData, clearItem } from "../utils/saveData";
 
 const axiosInstance = axios.create({
 	baseURL: "https://health-sup-aid.up.railway.app/api/v1/",
@@ -35,7 +35,10 @@ axiosInstance.interceptors.response.use(
 	function (error) {
 		// Any status codes that falls outside the range of 2xx cause this function to trigger
 		// Do something with response error
-		console.log("response error", error);
+		if (error?.status === 401) {
+			clearItem();
+		}
+
 		return Promise.reject(error?.response);
 	},
 );
