@@ -33,9 +33,10 @@ axiosInstance.interceptors.response.use(
 		return response;
 	},
 	function (error) {
+		console.log(error);
 		// Any status codes that falls outside the range of 2xx cause this function to trigger
 		// Do something with response error
-		if (error?.status === 401) {
+		if (error?.response?.status === 401) {
 			clearItem();
 		}
 

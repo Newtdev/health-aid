@@ -16,14 +16,14 @@ export default function DashboardHome() {
   const routes = useRoutes(DashboardRoutes);
   const [toggleNav, setToggleNav] = useState(false);
   return (
-    <section className="h-full w-screen overflow-x-hidden">
-      <Header setToggleNav={setToggleNav} />
-      <Sidebar toggleNav={toggleNav} setToggleNav={setToggleNav} />
-      <div className="lg:w-[calc(100vw-16rem)] ml-auto  h-full flex items-center justify-between">
-        <DashboardWrapper>{routes}</DashboardWrapper>
-      </div>
-    </section>
-  );
+		<section className="h-full w-screen overflow-x-hidden bg-white">
+			<Header setToggleNav={setToggleNav} />
+			<Sidebar toggleNav={toggleNav} setToggleNav={setToggleNav} />
+			<div className="lg:w-[calc(100vw-16rem)] ml-auto  h-full flex items-center justify-between">
+				<DashboardWrapper>{routes}</DashboardWrapper>
+			</div>
+		</section>
+	);
 }
 const DashboardRoutes = configureRoutes([
   { path: "*", element: <Navigate to={ROUTE.Dashboard_Home} /> },

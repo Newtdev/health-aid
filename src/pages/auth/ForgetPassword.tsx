@@ -45,69 +45,69 @@ export default function ForgotPassword() {
   }
 
   return (
-    <section className="w-full h-screen  flex justify-center items-center">
-      <article className="w-full md:w-[90%] flex items-center justify-center lg:p-16 bg-white rounded-lg ">
-        {forgotPassword?.isLoading ? <Loader /> : null}
-        {/* {forgotPassword?.isSuccess ? (
+		<section className="w-full h-screen  flex justify-center items-center">
+			<article className="w-full md:w-[90%] flex items-center justify-center lg:p-16 bg-white rounded-lg ">
+				{forgotPassword?.isLoading ? <Loader /> : null}
+				{/* {forgotPassword?.isSuccess ? (
 					<ModalComp
 						header="Update Password"
 						text="Check your email for update password link"
 						show={forgotPassword.isSuccess}
 					/>
 				) : null} */}
-        <form
-          className="w-full flex flex-col gap-4 md:w-[90%]"
-          onSubmit={formik.handleSubmit}>
-          <div className="my-3">
-            <div className="flex justify-center lg:hidden mb-6">
-              <LogoComp />
-            </div>
-            <h1 className="text-primary-dark text-lg md:text-lg lg:text-3xl text-center">
-              Forgot Password
-            </h1>
-          </div>
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="email1" value="Email address" />
-            </div>
-            <TextInput
-              id="email1"
-              placeholder=""
-              required
-              sizing="lg"
-              type="email"
-              color={
-                formik.errors.email && formik.touched.email ? "failure" : "gray"
-              }
-              helperText={
-                <InputError
-                  error={formik.errors.email && formik.touched.email}
-                  name={formik.errors?.email || ""}
-                />
-              }
-              {...formik.getFieldProps("email")}
-            />
-          </div>
+				<form
+					className="w-full flex flex-col gap-4 px-4 md:px-0 md:w-[90%]"
+					onSubmit={formik.handleSubmit}>
+					<div className="my-3">
+						<div className="flex justify-center lg:hidden mb-6">
+							<LogoComp />
+						</div>
+						<h1 className="text-primary-dark text-lg md:text-lg lg:text-3xl text-center">
+							Forgot Password
+						</h1>
+					</div>
+					<div>
+						<div className="mb-2 block">
+							<Label htmlFor="email1" value="Email address" />
+						</div>
+						<TextInput
+							id="email1"
+							placeholder=""
+							required
+							sizing="lg"
+							type="email"
+							color={
+								formik.errors.email && formik.touched.email ? "failure" : "gray"
+							}
+							helperText={
+								<InputError
+									error={formik.errors.email && formik.touched.email}
+									name={formik.errors?.email || ""}
+								/>
+							}
+							{...formik.getFieldProps("email")}
+						/>
+					</div>
 
-          <Button
-            className="bg-primary-dark"
-            disabled={!formik.isValid}
-            size="lg"
-            type="submit">
-            Submit
-          </Button>
-          <div className="text-gray-700 flex flex-col md:flex-row items-center justify-center  lg:gap-x-2 text-xs md:text-base">
-            <p>Don't have an account? </p>{" "}
-            <Label htmlFor="remember" className="font-bold text-lg md:ml-2">
-              <NavLink
-                className="text-primary-dark text-sm md:text-base"
-                to={ROUTE.Sign_up}>
-                Create account
-              </NavLink>
-            </Label>
-          </div>
-        </form>
-      </article>
-    </section>
-  );
+					<Button
+						className="bg-primary-dark"
+						disabled={!formik.isValid}
+						size="lg"
+						type="submit">
+						Submit
+					</Button>
+					<div className="text-gray-700 flex flex-col md:flex-row items-center justify-center  lg:gap-x-2 text-xs md:text-base">
+						<p>Don't have an account? </p>{" "}
+						<Label htmlFor="remember" className="font-bold text-lg md:ml-2">
+							<NavLink
+								className="text-primary-dark text-sm md:text-base"
+								to={ROUTE.Sign_up}>
+								Create account
+							</NavLink>
+						</Label>
+					</div>
+				</form>
+			</article>
+		</section>
+	);
 }

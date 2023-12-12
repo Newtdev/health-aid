@@ -76,199 +76,198 @@ export default function CreateAppointment() {
     formik.setFieldValue("meta.address", value);
   };
   return (
-    <section className="h-full w-full overflow-x-hidden">
-      {appointmentMutation?.isLoading ? <Loader /> : null}
-      <article className="mt-12 pt-16 flex gap-10 px-4 lg:px-0 justify-between mb-4 lg:mb-0">
-        <form
-          className="flex w-full flex-col gap-4"
-          onSubmit={formik.handleSubmit}>
-          <div id="select">
-            <div className="mb-2 block">
-              <Label htmlFor="appointment-type" value="Appointment channel" />
-            </div>
-            <Select
-              id="countries"
-              sizing="lg"
-              required
-              color={
-                formik.errors.channel && formik.touched.channel
-                  ? "failure"
-                  : "gray"
-              }
-              helperText={
-                <InputError
-                  error={formik.errors.channel && formik.touched.channel}
-                  name={formik.errors?.channel || ""}
-                />
-              }
-              onChange={(e) => formik.setFieldValue("channel", e.target.value)}>
-              <option>Select option</option>
-              <option value="video">Video call</option>
-              <option value="in-person">In-person</option>
-              <option value="audio">Audio</option>
-            </Select>
-          </div>
+		<section className="h-full w-full overflow-x-hidden">
+			{appointmentMutation?.isLoading ? <Loader /> : null}
+			<article className="mt-12 pt-16 flex gap-10 px-4 lg:px-0 justify-between mb-4 lg:mb-0">
+				<form
+					className="flex w-full flex-col gap-4"
+					onSubmit={formik.handleSubmit}>
+					<div id="select">
+						<div className="mb-2 block">
+							<Label htmlFor="appointment-type" value="Appointment channel" />
+						</div>
+						<Select
+							id="countries"
+							sizing="lg"
+							required
+							color={
+								formik.errors.channel && formik.touched.channel
+									? "failure"
+									: "gray"
+							}
+							helperText={
+								<InputError
+									error={formik.errors.channel && formik.touched.channel}
+									name={formik.errors?.channel || ""}
+								/>
+							}
+							onChange={(e) => formik.setFieldValue("channel", e.target.value)}>
+							<option>Select option</option>
+							<option value="video">Video call</option>
+							<option value="audio">Audio</option>
+						</Select>
+					</div>
 
-          <div id="select">
-            <div className="mb-2 block">
-              <Label htmlFor="type" value="Appointment types" />
-            </div>
-            <Select
-              id="countries"
-              sizing="lg"
-              required
-              color={
-                formik.errors.type && formik.touched.type ? "failure" : "gray"
-              }
-              helperText={
-                <InputError
-                  error={formik.errors.type && formik.touched.type}
-                  name={formik.errors?.type || ""}
-                />
-              }
-              onChange={(e) => formik.setFieldValue("type", e.target.value)}>
-              <option>Select option</option>
-              <option value="home_visit">Home Visit</option>
-              <option value="clinic_visit">Clinic visit</option>
-              <option value="tele_health">Tele health</option>
-            </Select>
-          </div>
-          <div className="grid grid-cols-2 gap-x-4 mt-3">
-            <div>
-              <Label htmlFor="Date" value="Date" />
-              <Datepicker
-                autoHide={false}
-                sizing="lg"
-                color={
-                  formik.errors.appointmentDate &&
-                  formik.touched.appointmentDate
-                    ? "failure"
-                    : "gray"
-                }
-                helperText={
-                  <InputError
-                    error={
-                      formik.errors.appointmentDate &&
-                      formik.touched.appointmentDate
-                    }
-                    name={formik.errors?.appointmentDate || ""}
-                  />
-                }
-                {...formik.getFieldHelpers("date")}
-              />
-            </div>
-            <div className="flex flex-col justify-center">
-              <Label htmlFor="time" value="Time" />
-              <TextInput
-                id="disabledInput1"
-                placeholder="Disabled input"
-                type="time"
-                sizing="lg"
-                color={
-                  formik.errors.meta?.time && formik.touched.meta?.time
-                    ? "failure"
-                    : "gray"
-                }
-                helperText={
-                  <InputError
-                    error={
-                      formik.errors.meta?.time && formik.touched.meta?.time
-                    }
-                    name={formik.errors?.meta?.time || ""}
-                  />
-                }
-                {...formik.getFieldHelpers("meta.time")}
-              />
-            </div>
-          </div>
-          <div className="my-3">
-            <Label className="block mb-3">Address</Label>
-            <GoogleLocationInput
-              getLat={getLat}
-              getLong={getLong}
-              getAddress={getAddress}
-            />
-          </div>
-          <div className="mt-3">
-            <Label htmlFor="disabledInput1" className="block mb-3">
-              Symptoms
-            </Label>
+					<div id="select">
+						<div className="mb-2 block">
+							<Label htmlFor="type" value="Appointment types" />
+						</div>
+						<Select
+							id="countries"
+							sizing="lg"
+							required
+							color={
+								formik.errors.type && formik.touched.type ? "failure" : "gray"
+							}
+							helperText={
+								<InputError
+									error={formik.errors.type && formik.touched.type}
+									name={formik.errors?.type || ""}
+								/>
+							}
+							onChange={(e) => formik.setFieldValue("type", e.target.value)}>
+							<option>Select option</option>
+							<option value="home_visit">Home Visit</option>
+							<option value="clinic_visit">Clinic visit</option>
+							<option value="tele_health">Tele health</option>
+						</Select>
+					</div>
+					<div className="grid grid-cols-2 gap-x-4 mt-3">
+						<div>
+							<Label htmlFor="Date" value="Date" />
+							<Datepicker
+								autoHide={false}
+								sizing="lg"
+								color={
+									formik.errors.appointmentDate &&
+									formik.touched.appointmentDate
+										? "failure"
+										: "gray"
+								}
+								helperText={
+									<InputError
+										error={
+											formik.errors.appointmentDate &&
+											formik.touched.appointmentDate
+										}
+										name={formik.errors?.appointmentDate || ""}
+									/>
+								}
+								{...formik.getFieldHelpers("date")}
+							/>
+						</div>
+						<div className="flex flex-col justify-center">
+							<Label htmlFor="time" value="Time" />
+							<TextInput
+								id="disabledInput1"
+								placeholder="Disabled input"
+								type="time"
+								sizing="lg"
+								color={
+									formik.errors.meta?.time && formik.touched.meta?.time
+										? "failure"
+										: "gray"
+								}
+								helperText={
+									<InputError
+										error={
+											formik.errors.meta?.time && formik.touched.meta?.time
+										}
+										name={formik.errors?.meta?.time || ""}
+									/>
+								}
+								{...formik.getFieldHelpers("meta.time")}
+							/>
+						</div>
+					</div>
+					<div className="my-3">
+						<Label className="block mb-3">Address</Label>
+						<GoogleLocationInput
+							getLat={getLat}
+							getLong={getLong}
+							getAddress={getAddress}
+						/>
+					</div>
+					<div className="mt-3">
+						<Label htmlFor="disabledInput1" className="block mb-3">
+							Symptoms
+						</Label>
 
-            {formik.values?.symptoms.map((_, i) => (
-              <div className="flex justify-between items-center gap-x-2">
-                <TextInput
-                  id="symptoms"
-                  width="100%"
-                  placeholder={`Symptoms ${i + 1}`}
-                  // name={`symptoms-${[i]}`}
-                  type="text"
-                  sizing="lg"
-                  defaultValue={formik.values?.symptoms[i]}
-                  className="my-3 w-full"
-                  color={
-                    formik.errors.symptoms?.[i] && formik.touched.symptoms
-                      ? "failure"
-                      : "gray"
-                  }
-                  helperText={
-                    <InputError
-                      error={formik.errors.symptoms && formik.touched.symptoms}
-                      name={formik.errors?.symptoms?.[i] || ""}
-                    />
-                  }
-                  onChange={(e) =>
-                    formik.setFieldValue(`symptoms.${[i]}`, e.target.value)
-                  }
-                />
-                <Button
-                  type="button"
-                  className="bg-primary-light"
-                  onClick={() => removeSymptons(i)}>
-                  <LiaTimesSolid className="font-bold text-base" />
-                </Button>
-              </div>
-            ))}
-            <div className="w-full flex justify-between">
-              <Button
-                type="button"
-                className="bg-green-700"
-                onClick={addSymptons}>
-                <IoAddOutline className="font-bold text-lg" />
-              </Button>
-            </div>
-          </div>
-          <div>
-            <div id="textarea">
-              <div className="mb-2 block">
-                <Label htmlFor="comment" value="How do you feel?" />
-              </div>
-              <Textarea
-                id="comment"
-                placeholder="Leave a comment..."
-                rows={4}
-                {...formik.getFieldHelpers("meta.comment")}
-              />
-            </div>
-          </div>
+						{formik.values?.symptoms.map((_, i) => (
+							<div className="flex justify-between items-center gap-x-2">
+								<TextInput
+									id="symptoms"
+									width="100%"
+									placeholder={`Symptoms ${i + 1}`}
+									// name={`symptoms-${[i]}`}
+									type="text"
+									sizing="lg"
+									defaultValue={formik.values?.symptoms[i]}
+									className="my-3 w-full"
+									color={
+										formik.errors.symptoms?.[i] && formik.touched.symptoms
+											? "failure"
+											: "gray"
+									}
+									helperText={
+										<InputError
+											error={formik.errors.symptoms && formik.touched.symptoms}
+											name={formik.errors?.symptoms?.[i] || ""}
+										/>
+									}
+									onChange={(e) =>
+										formik.setFieldValue(`symptoms.${[i]}`, e.target.value)
+									}
+								/>
+								<Button
+									type="button"
+									className="bg-primary-light"
+									onClick={() => removeSymptons(i)}>
+									<LiaTimesSolid className="font-bold text-base" />
+								</Button>
+							</div>
+						))}
+						<div className="w-full flex justify-between">
+							<Button
+								type="button"
+								className="bg-green-700"
+								onClick={addSymptons}>
+								<IoAddOutline className="font-bold text-lg" />
+							</Button>
+						</div>
+					</div>
+					<div>
+						<div id="textarea">
+							<div className="mb-2 block">
+								<Label htmlFor="comment" value="How do you feel?" />
+							</div>
+							<Textarea
+								id="comment"
+								placeholder="Leave a comment..."
+								rows={4}
+								{...formik.getFieldHelpers("meta.comment")}
+							/>
+						</div>
+					</div>
 
-          <Button type="submit" className="bg-primary-dark mt-4" size="lg">
-            Book appointments
-          </Button>
-        </form>
-        <div className="basis-[40%] hidden lg:block mx-auto ">
-          <h6 className="font-bold text-black">Calendar</h6>
-          <Flowbite theme={{ theme: customTheme }}>
-            <Datepicker
-              color="red"
-              className="text-white active:bg-red-900s "
-              inline
-              theme={customTheme}
-            />
-          </Flowbite>
-        </div>
-      </article>
-    </section>
-  );
+					<Button type="submit" className="bg-primary-dark mt-4" size="lg">
+						Book appointments
+					</Button>
+				</form>
+				<div className="basis-[40%] hidden lg:block mx-auto ">
+					<h6 className="font-bold text-black">Calendar</h6>
+					<Flowbite theme={{ theme: customTheme }}>
+						<Datepicker
+							color="red"
+							className="text-white active:bg-red-900s "
+							inline
+							theme={customTheme}
+						/>
+					</Flowbite>
+				</div>
+			</article>
+		</section>
+	);
 }
 
 const customTheme: any = {

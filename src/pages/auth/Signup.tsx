@@ -201,7 +201,7 @@ export default function SignUp() {
 						type="submit">
 						Register
 					</Button>
-					<div className="text-gray-700 flex items-center justify-center gap-x-2">
+					<div className="text-gray-700 flex flex-col md:flex-row items-center justify-center gap-x-2 ">
 						<p>Already have an account?</p>
 						<Label
 							htmlFor="remember"
